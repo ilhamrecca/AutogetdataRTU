@@ -1,6 +1,6 @@
 "use strict";
 $(document).ready(function () {
-  //   fetch("http://127.0.0.1:4000/retensis/getParametersData")
+  //   fetch("https://appv.cloud:4000/retensis/getParametersData")
   //     .then((response) => response.json())
   //     .then((data) => {
   //       document.getElementById("volt").innerHTML = data.vAverage + " V";
@@ -9,11 +9,10 @@ $(document).ready(function () {
   //       document.getElementById("tanki").innerHTML = data.BBM + " Liter";
   //     });
 
-  fetch("http://127.0.0.1:4000/retensis/getWitelList")
+  fetch("https://appv.cloud:4000/retensis/getWitelList")
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      let witelList = document.getElementById("witelList");
       for (let i = 0; i < data.witelList.length; i++) {
         let option = document.createElement("option");
         option.text = data.witelList[i].name;
@@ -22,7 +21,7 @@ $(document).ready(function () {
       }
     });
 
-  fetch("http://127.0.0.1:4000/retensis/getRtuByWitel")
+  fetch("https://appv.cloud:4000/retensis/getRtuByWitel")
     .then((response) => response.json())
     .then((data) => {
       //   console.log(data);
@@ -70,6 +69,11 @@ $(document).ready(function () {
         optgroup.label = data.witel[i].name;
         rtuList.appendChild(optgroup);
 
+        let optionDefault = document.createElement("option");
+        optionDefault.text = "Choose RTU";
+        optionDefault.value = "";
+        optgroup.appendChild(optionDefault);
+
         for (let j = 0; j < data.witel[i].Rtus.length; j++) {
           let option = document.createElement("option");
           option.text = data.witel[i].Rtus[j].name;
@@ -114,7 +118,7 @@ $(document).ready(function () {
       body: JSON.stringify(data), // Convert the data to a JSON string
     };
     fetch(
-      "http://127.0.0.1:4000/retensis/getKWHMonthly/" + selectedRtu,
+      "https://appv.cloud:4000/retensis/getKWHMonthly/" + selectedRtu,
       options
     )
       .then((response) => response.json())
@@ -143,7 +147,7 @@ $(document).ready(function () {
       body: JSON.stringify(data), // Convert the data to a JSON string
     };
     fetch(
-      "http://127.0.0.1:4000/retensis/getHourlyPowerData/" + selectedRtu,
+      "https://appv.cloud:4000/retensis/getHourlyPowerData/" + selectedRtu,
       options
     )
       .then((response) => response.json())
@@ -356,7 +360,10 @@ $(document).ready(function () {
       headers,
       body: JSON.stringify(data), // Convert the data to a JSON string
     };
-    fetch("http://127.0.0.1:4000/retensis/getKWHDaily/" + selectedRtu, options)
+    fetch(
+      "https://appv.cloud:4000/retensis/getKWHDaily/" + selectedRtu,
+      options
+    )
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
