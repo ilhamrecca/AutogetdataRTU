@@ -175,7 +175,7 @@ $(document).ready(function () {
 
           // Create a Date object
           let parsedDate = new Date(year, month - 1, day, hour, minute, second);
-          parsedDate.setHours(parsedDate.getHours() - 8);
+          parsedDate.setHours(parsedDate.getHours());
           return {
             activePowerTotal: datum.activePowerTotal,
             activePower_R: datum.activePower_R,
